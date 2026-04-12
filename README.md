@@ -35,17 +35,21 @@ Evaluation metrics include:
 - ROC-AUC
 - Average Precision (PR-AUC)
 
-Feature importance was also explored (including SHAP in the `All Steps/SHAPTesting` workflow), with strong performance retained under reduced feature sets.
+Feature importance was also explored (including SHAP in the `notebooks/shap` workflow), with strong performance retained under reduced feature sets.
 
 ---
 
-## Running the project (updated for `testHere/`)
+## Scalability and Deployment
+This baseline workflow can scale from local experimentation to production by packaging the training logic in `src/alzheimer_research/train_baseline.py` and parameterizing data/model settings via config files or CLI arguments. For larger datasets, you can swap local CSV loading for a feature store or cloud object storage, parallelize hyperparameter search, and run scheduled retraining jobs in containers (Docker) on platforms like AWS Batch, Vertex AI, or Azure ML. The same package structure also makes it straightforward to deploy inference as a lightweight API service (e.g., FastAPI) with model artifacts versioned in an experiment tracker or model registry.
+
+## Running the project (updated for `src/`)
 The quick-start model run now lives in:
-- Script: `testHere/test_model.py`
-- Notebook (legacy, same logic in one cell): `testHere/test_model.ipynb`
+- Script: `src/alzheimer_research/train_baseline.py`
+- Compatibility wrapper script (legacy path): `testHere/test_model.py`
+- Notebook (legacy, same logic in one cell): `notebooks/modeling/test_model.ipynb`
 - Input data: `testHere/data/alzheimers_balanced_small.csv`
 
-The Python script uses a file path relative to itself, so you can run it directly from the repo root.
+The Python script uses a repo-relative default data path, so you can run it directly from the repo root.
 
 ### 1) Clone and enter the repo
 ```bash
@@ -68,12 +72,12 @@ pip install -r requirements.txt
 
 ### 4) Run the quick-start model script
 ```bash
-python testHere/test_model.py
+python src/alzheimer_research/train_baseline.py
 ```
 This runs the same model comparison workflow (Random Forest, XGBoost, and SVM) and prints metrics/results in terminal.
 
 ### 5) (Optional) Run the notebook version
 ```bash
-jupyter notebook testHere/test_model.ipynb
+jupyter notebook notebooks/modeling/test_model.ipynb
 ```
 Then use **Run All**.
