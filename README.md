@@ -77,10 +77,3 @@ This runs the same model comparison workflow (Random Forest, XGBoost, and SVM) a
 jupyter notebook testHere/test_model.ipynb
 ```
 Then use **Run All**.
-
----
-
-## Repository layout (high level)
-- `testHere/` → compact test workflow + small balanced dataset
-- `All Steps/` → full pipeline notebooks (cleaning, preprocessing, modeling, SHAP)
-- `Smaller Dataset Testing/` → additional exploratory experiments
